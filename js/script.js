@@ -27,6 +27,8 @@ if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Interne
 
 	//preloader fadeOut
 	$(window).load(function(){
+		$("body").css("overflow-x","hidden");
+		
 		setTimeout(function(){
 				$(window).scrollLeft(0);
 			$('#preloader').fadeOut(2000);
@@ -36,8 +38,17 @@ if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))  // If Interne
 			rainbox_action();
 			$(".bg-lines").fadeIn(3000);
 			$(".logo .scroll").fadeIn(3000);
-		}, 1500); //2500
+			$("body").css("overflow-x","auto");
+		}, 1500);
 	});
+	
+	$("body").on('scroll touchmove mousewheel', function(e){
+		if($("body").css("overflow-x") == "hidden"){
+			e.preventDefault();
+			e.stopPropagation();
+			return false;
+		}
+	})
 
    //layer 1 animation
    function layer1_action(){
